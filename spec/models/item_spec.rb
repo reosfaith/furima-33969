@@ -58,8 +58,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it '販売価格は¥300~¥9,999,999の間でないと出品できない' do
+      it '販売価格は¥300~¥9,999,999の間でないと出品できない（¥300未満の場合）' do
         @item.price = 200
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be hankaku-number and between ¥300~¥9,999,999')
+      end
+      it '販売価格は¥300~¥9,999,999の間でないと出品できない（¥10,000,000以上の場合）' do
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be hankaku-number and between ¥300~¥9,999,999')
       end
