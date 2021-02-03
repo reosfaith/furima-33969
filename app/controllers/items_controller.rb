@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :item_find, only: [:show, :edit, :update, :move_to_index]
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
@@ -31,8 +31,16 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to item_path(params[:id])
     else
-      render  :edit
+      render :edit
     end
+  end
+
+  def destroy
+    @item.destroy
+    if  @item.destroy
+      redirect_to root_path
+    else
+      redirect_to item_path(params[:id])
   end
 
   private
@@ -42,13 +50,11 @@ class ItemsController < ApplicationController
                                  :shipping_area_id, :shipping_date_id).merge(user_id: current_user.id)
   end
 
-  def item_find
+  def find_item
     @item = Item.find(params[:id])
   end
 
   def move_to_index
-    unless current_user.id == @item.user.id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @item.user.id
   end
 end
