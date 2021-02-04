@@ -47,7 +47,7 @@
 
 ### Association
 
-- has_many :users
+- belongs_to :users
 - belongs_to :item
 - has_one :destination
 
@@ -56,7 +56,7 @@
 | Column        | Type    | Options     |
 | ------------- | ------- | ----------- |
 | post_code     | string  | null: false |
-| prefecture_id | string  | null: false |
+| prefecture_id | integer | null: false |
 | city          | string  | null: false |
 | house_number  | string  | null: false |
 | building_name | string  | null: false |
