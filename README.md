@@ -52,14 +52,15 @@
 
 ## destinations テーブル
 
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| post_code     | string  | null: false |
-| prefecture_id | integer | null: false |
-| city          | string  | null: false |
-| house_number  | string  | null: false |
-| building_name | string  | null: false |
-| phone_number  | string  | null: false |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| post_code     | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     | null: false                    |
+| phone_number  | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
