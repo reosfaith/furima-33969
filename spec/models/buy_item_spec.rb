@@ -12,6 +12,11 @@ RSpec.describe BuyItem, type: :model do
       it "すべての情報が登録できる" do
         expect(@buy_item).to be_valid
       end
+
+      it "building_nameがなくても登録できる" do
+        @buy_item.building_name = ''
+        expect(@buy_item).to be_valid
+      end
     end
 
     context "商品の購入ができない時" do
@@ -76,7 +81,7 @@ RSpec.describe BuyItem, type: :model do
         expect(@buy_item.errors.full_messages).to include("Token can't be blank")
       end
 
-      it "use_idがないと購入できない" do
+      it "user_idがないと購入できない" do
         @buy_item.user_id = ''
         @buy_item.valid?
         expect(@buy_item.errors.full_messages).to include("User can't be blank")
