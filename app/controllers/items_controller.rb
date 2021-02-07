@@ -57,12 +57,12 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redi      rect_to action: :index unless current_user.id == @item.user.id
+    redirect_to action: :index unless current_user.id == @item.user.id
   end
 
   def sold_out
     if @item.order.present?
-      render :index
+      redirect_to  action: :index
     end
   end
 end
