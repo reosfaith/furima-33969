@@ -52,6 +52,12 @@ RSpec.describe BuyItem, type: :model do
         expect(@buy_item.errors.full_messages).to include("Post code must be number includes hypen" )
       end
 
+      it "prefecture_idが1(--)だと購入できない" do
+        @buy_item.prefecture_id = 1
+        @buy_item.valid?
+        expect(@buy_item.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+
       it "電話番号が11桁以内の数値でないと購入できない（12桁以上の場合）" do
         @buy_item.phone_number = '123456789101'
         @buy_item.valid?
