@@ -15,9 +15,8 @@ class OrdersController < ApplicationController
     if @buy_item.valid? && @item.user.id != current_user.id
       pay_item
       @buy_item.save
-      redirect_to item_orders_path(params[:item_id])
+      redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -43,7 +42,7 @@ class OrdersController < ApplicationController
 
   def sold_out
     if @item.order.present?
-      redirect_to :root
+      redirect_to root_path
     end
   end
 end

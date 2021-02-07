@@ -3,7 +3,7 @@ class BuyItem
   attr_accessor :post_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
-    validates :prefecture_id, :city, :house_number, :token
+    validates :prefecture_id, :city, :house_number, :token, :user_id, :item_id
     validates :post_code, format: {with: /\A\d{3}[-]\d{4}\Z/, message: "must be number includes hypen" }
     validates :phone_number, format: {with: /\A[0-90-9]{1,11}\Z/, message: "must be number within 11 characters"}
   end
